@@ -1,5 +1,5 @@
 Package: data.table
-Version: 1.18.0
+Version: 1.18.2.1
 Title: Extension of `data.frame`
 Depends: R (>= 3.4.0)
 Imports: methods
@@ -107,10 +107,11 @@ Authors@R: c(
   person(given="@badasahog",       role="ctb", comment="GitHub user"),
   person("Vinit", "Thakur",        role="ctb"),
   person("Mukul", "Kumar",         role="ctb"),
-  person("Ildikó", "Czeller",      role="ctb")
+  person("Ildikó", "Czeller",      role="ctb"),
+  person("Manmita", "Das",         role="ctb")
   )
 NeedsCompilation: yes
-Packaged: 2025-12-23 19:08:26 UTC; tysonbarrett
+Packaged: 2026-01-25 04:12:25 UTC; tysonbarrett
 Author: Tyson Barrett [aut, cre] (ORCID:
     <https://orcid.org/0000-0002-2137-1391>),
   Matt Dowle [aut],
@@ -206,7 +207,8 @@ Author: Tyson Barrett [aut, cre] (ORCID:
   @badasahog [ctb] (GitHub user),
   Vinit Thakur [ctb],
   Mukul Kumar [ctb],
-  Ildikó Czeller [ctb]
+  Ildikó Czeller [ctb],
+  Manmita Das [ctb]
 Maintainer: Tyson Barrett <t.barrett88@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-12-24 12:05:11 UTC
+Date/Publication: 2026-01-27 11:40:15 UTC

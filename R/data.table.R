@@ -2854,10 +2854,33 @@ setcolorder = function(x, neworder=key(x), before=NULL, after=NULL, skip_absent=
   invisible(x)
 }
 
+.set_needs_alloccol = function(x, j, value) {
+  # set() will try to resize x when adding or removing columns
+  # when removing a column, value can be NULL or list with NULLs inside
+  removing = is.null(value) || (is.list(value) && length(value) == length(j) && any(vapply_1b(value, is.null)))
+  # columns can be created by name
+  adding = if (is.character(j)) {
+    jexists = j %chin% names(x)
+    !all(jexists)
+  } else FALSE
+
+  if (!(removing || adding)) return(FALSE)
+
+  # automatically allocate more space when tl <= ncol (either full or loaded from disk)
+  # (or if a resize operation would otherwise fail)
+  if (selfrefok(x, verbose=FALSE) < 1L || truelength(x) <= length(x))
+    return(TRUE)
+
+  if (adding)
+    return(truelength(x) < length(x) + sum(!jexists))
+
+  FALSE
+}
+
 set = function(x,i=NULL,j,value)  # low overhead, loopable
 {
   # If removing columns from a table that's not selfrefok, need to call setalloccol first, #7488
-  if ((is.null(value) || (is.list(value) && any(vapply_1b(value, is.null)))) && selfrefok(x, verbose=FALSE) < 1L) {
+  if (.set_needs_alloccol(x, j, value)) {
     name = substitute(x)
     setalloccol(x, verbose=FALSE)
     if (is.name(name)) {

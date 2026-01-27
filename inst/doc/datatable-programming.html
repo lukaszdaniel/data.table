@@ -117,7 +117,7 @@ section.footnotes {
 <body>
 <div class="frontmatter">
 <div class="title"><h1>Programming on data.table</h1></div>
-<div class="date"><h3>2025-12-23</h3></div>
+<div class="date"><h3>2026-01-24</h3></div>
 </div>
 <div class="body">
 <p>Translations of this document are available in: en | <a href="https://rdatatable.gitlab.io/data.table/articles/fr/datatable-programming.html">fr</a></p>
@@ -137,7 +137,8 @@ section.footnotes {
   subset(data, col == val)
 }
 my_subset(iris, Species, &quot;setosa&quot;)
-# Error: object 'Species' not found
+# Error:
+# ! object 'Species' not found
 </code></pre>
 <h3 id="sec:approaches-to-the-problem">Approaches to the problem</h3>
 <p>There are multiple ways to work around this problem.</p>
@@ -465,7 +466,8 @@ DT[, j,  # the same as above but accepts character vector
    env = I(list(j = lapply(cols, as.name))),
    verbose = TRUE]
 # Argument 'j' after substitute: list(Sepal.Length, Sepal.Width)
-# Error in `[.data.table`(DT, , j, env = I(list(j = lapply(cols, as.name))), : When with=FALSE, j-argument should be of type logical/character/integer indicating the columns to select.
+# Error in `[.data.table`:
+# ! When with=FALSE, j-argument should be of type logical/character/integer indicating the columns to select.
 
 DT[, j,  # again the proper way, enlist list to list call automatically
    env = list(j = as.list(cols)),

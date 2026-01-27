@@ -1,5 +1,10 @@
 #ifndef _WIN32
-#  include <sys/wait.h>
+#  if !defined(_POSIX_C_SOURCE) || _POSIX_C_SOURCE < 200809L
+#    undef _POSIX_C_SOURCE
+#    define _POSIX_C_SOURCE 200809L // required for POSIX (not standard C) features in is_direct_child e.g. 'siginfo_t'
+#  endif
+#  include <signal.h> // siginfo_t
+#  include <sys/wait.h> // waitid
 #endif
 
 #include "data.table.h"
@@ -629,7 +634,7 @@ SEXP frev(SEXP x, SEXP copyArg) {
     SEXP levels = PROTECT(getAttrib(x, R_LevelsSymbol));
     nprotect += 2;
     // swipe attributes from x
-    SET_ATTRIB(x, R_NilValue);
+    CLEAR_ATTRIB(x);
     setAttrib(x, R_NamesSymbol, names);
     setAttrib(x, R_ClassSymbol, klass);
     setAttrib(x, R_LevelsSymbol, levels);
@@ -677,6 +682,23 @@ void R_resizeVector_(SEXP x, R_xlen_t newlen) {
 }
 #endif
 
+#ifdef BACKPORT_MAP_ATTRIB
+SEXP R_mapAttrib_(SEXP x, SEXP (*fun)(SEXP key, SEXP val, void *ctx), void *ctx) {
+  PROTECT_INDEX i;
+  SEXP a = ATTRIB(x);
+  PROTECT_WITH_INDEX(a, &i);
+
+  SEXP ret = NULL;
+  for (; !isNull(a); REPROTECT(a = CDR(a), i)) {
+    ret = fun(PROTECT(TAG(a)), PROTECT(CAR(a)), ctx);
+    UNPROTECT(2);
+    if (ret) break;
+  }
+
+  UNPROTECT(1);
+  return ret;
+}
+#endif
 // # nocov start
 #ifdef _WIN32
 NORET
