@@ -900,6 +900,7 @@ const char *memrecycle(const SEXP target, const SEXP where, const int start, con
       case REALSXP: if (sourceIsI64)
                     CHECK_RANGE(int64_t, REAL, val!=0 && val!=1 && val!=NA_INTEGER64,                   val, _("%"PRId64" (type '%s') at RHS position %d taken as TRUE when assigning to type '%s' %s"))
               else  CHECK_RANGE(double, REAL,  !ISNAN(val) && val!=0.0 && val!=1.0,                     val, _("%f (type '%s') at RHS position %d taken as TRUE when assigning to type '%s' %s"))
+      default: break;
       } break;
     case RAWSXP:
       switch (TYPEOF(source)) {
@@ -907,6 +908,7 @@ const char *memrecycle(const SEXP target, const SEXP where, const int start, con
       case REALSXP: if (sourceIsI64)
                     CHECK_RANGE(int64_t, REAL, val<0 || val>255,                                        val, _("%"PRId64" (type '%s') at RHS position %d taken as 0 when assigning to type '%s' %s"))
               else  CHECK_RANGE(double, REAL,  !R_FINITE(val) || val<0.0 || val>256.0 || (int)val!=val, val, _("%f (type '%s') at RHS position %d either truncated (precision lost) or taken as 0 when assigning to type '%s' %s"))
+      default: break;
       } break;
     case INTSXP:
       switch (TYPEOF(source)) {
@@ -915,6 +917,7 @@ const char *memrecycle(const SEXP target, const SEXP where, const int start, con
               else  CHECK_RANGE(double, REAL,  !ISNAN(val) && (!within_int32_repres(val) || (int)val!=val),        val, _("%f (type '%s') at RHS position %d out-of-range(NA) or truncated (precision lost) when assigning to type '%s' %s"))
       case CPLXSXP: CHECK_RANGE(Rcomplex, COMPLEX, !((ISNAN(val.i) || (R_FINITE(val.i) && val.i==0.0)) &&
                                                      (ISNAN(val.r) || (within_int32_repres(val.r) && (int)val.r==val.r))), val.r, _("%f (type '%s') at RHS position %d either imaginary part discarded or real part truncated (precision lost) when assigning to type '%s' %s"))
+      default: break;
       } break;
     case REALSXP:
       switch (TYPEOF(source)) {
@@ -925,7 +928,9 @@ const char *memrecycle(const SEXP target, const SEXP where, const int start, con
                     CHECK_RANGE(Rcomplex, COMPLEX, !((ISNAN(val.i) || (R_FINITE(val.i) && val.i==0.0)) &&
                                                      (ISNAN(val.r) || (R_FINITE(val.r) && (int64_t)val.r==val.r))), val.r, _("%f (type '%s') at RHS position %d either imaginary part discarded or real part truncated (precision lost) when assigning to type '%s' %s"))
               else  CHECK_RANGE(Rcomplex, COMPLEX, !(ISNAN(val.i) || (R_FINITE(val.i) && val.i==0.0)),  val.r, _("%f (type '%s') at RHS position %d imaginary part discarded when assigning to type '%s' %s"))
+      default: break;
       }
+    default: break;
     }
   }
 

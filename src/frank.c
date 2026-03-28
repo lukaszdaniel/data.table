@@ -97,6 +97,7 @@ SEXP dt_na(SEXP x, SEXP cols)
           }
         }
           break;
+        default: break;
         }
       }
     }

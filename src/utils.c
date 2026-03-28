@@ -100,7 +100,9 @@ bool allNA(SEXP x, bool errorForBadType) {
       return false;
     }
     return true;
-  }}
+  }
+  default: break;
+  }
   if (!errorForBadType) return false;
   error(_("Unsupported type '%s' passed to allNA()"), type2char(TYPEOF(x)));  // e.g. VECSXP; tests 2116.16-18
   // turned off allNA list support for now to avoid accidentally using it internally where we did not intend; allNA not yet exported
