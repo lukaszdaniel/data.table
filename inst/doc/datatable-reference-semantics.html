@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.8">
+<meta name="generator" content="litedown 0.9">
 <title>Reference semantics</title>
 <style type="text/css">
 body {
@@ -107,14 +107,12 @@ section.footnotes {
   body:not(.pagesjs) pre:has(.line-numbers):not(:hover) { white-space: pre; }
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.14/css/prism-xcode.min.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.35/css/prism-xcode.min.css">
 </head>
 <body>
 <div class="frontmatter">
 <div class="title"><h1>Reference semantics</h1></div>
-<div class="date"><h3>2026-01-24</h3></div>
+<div class="date"><h3>2026-05-04</h3></div>
 </div>
 <div class="body">
 <p>Translations of this document are available in: en | <a href="https://rdatatable.gitlab.io/data.table/articles/fr/datatable-reference-semantics.html">fr</a></p>
@@ -437,7 +435,7 @@ str(flights[, ..factor_cols])
 #  $ carrier: chr  &quot;AA&quot; &quot;AA&quot; &quot;AA&quot; &quot;AA&quot; ...
 #  $ origin : chr  &quot;JFK&quot; &quot;JFK&quot; &quot;JFK&quot; &quot;LGA&quot; ...
 #  $ dest   : chr  &quot;LAX&quot; &quot;LAX&quot; &quot;LAX&quot; &quot;PBI&quot; ...
-#  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;
+#  - attr(*, &quot;.internal.selfref&quot;)=&lt;pointer: 0x8bd017ee0&gt;
 </code></pre>
 <h4 id="sec:bs-callout-bs-callout-info">{.bs-callout .bs-callout-info}</h4>
 <ul>
@@ -596,5 +594,7 @@ z_cpy   # 1 2 3
 <p>So far we have seen a whole lot in <code>j</code>, and how to combine it with <code>by</code> and little of <code>i</code>. Let’s turn our attention back to <code>i</code> in the <a href="datatable-keys-fast-subset.html">next vignette (<code>vignette(&quot;datatable-keys-fast-subset&quot;, package=&quot;data.table&quot;)</code>)</a> to perform <em>blazing fast subsets</em> by <em>keying data.tables</em>.</p>
 <hr />
 </div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
 </html>

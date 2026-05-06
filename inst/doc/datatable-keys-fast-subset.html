@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.8">
+<meta name="generator" content="litedown 0.9">
 <title>Keys and fast binary search based subset</title>
 <style type="text/css">
 body {
@@ -107,14 +107,12 @@ section.footnotes {
   body:not(.pagesjs) pre:has(.line-numbers):not(:hover) { white-space: pre; }
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.14/css/prism-xcode.min.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.35/css/prism-xcode.min.css">
 </head>
 <body>
 <div class="frontmatter">
 <div class="title"><h1>Keys and fast binary search based subset</h1></div>
-<div class="date"><h3>2026-01-24</h3></div>
+<div class="date"><h3>2026-05-04</h3></div>
 </div>
 <div class="body">
 <p>Translations of this document are available in: en | <a href="https://rdatatable.gitlab.io/data.table/articles/fr/datatable-keys-fast-subset.html">fr</a></p>
@@ -631,7 +629,7 @@ print(object.size(DT), units = &quot;MiB&quot;)
 t1 &lt;- system.time(ans1 &lt;- DT[x == &quot;g&quot; &amp; y == 877L])
 t1
 #    user  system elapsed 
-#   0.215   0.017   0.232
+#   0.204   0.012   0.215
 head(ans1)
 #         x     y        val
 #    &lt;char&gt; &lt;int&gt;      &lt;num&gt;
@@ -652,7 +650,7 @@ key(DT)
 t2 &lt;- system.time(ans2 &lt;- DT[.(&quot;g&quot;, 877L)])
 t2
 #    user  system elapsed 
-#   0.001   0.000   0.001
+#       0       0       0
 head(ans2)
 # Key: &lt;x, y&gt;
 #         x     y        val
@@ -670,7 +668,7 @@ identical(ans1$val, ans2$val)
 # [1] TRUE
 </code></pre>
 <ul>
-<li>The speed-up is <strong>~232x</strong>!</li>
+<li>The speed-up is <strong>~215x</strong>!</li>
 </ul>
 <h3 id="sec:b-why-does-keying-a-data-table-result-in-blazing-fast-subsets">b) Why does keying a <em>data.table</em> result in blazing fast subsets?</h3>
 <p>To understand that, let’s first look at what <em>vector scan approach</em> (method 1) does.</p>
@@ -725,5 +723,7 @@ identical(ans1$val, ans2$val)
 </ul>
 <p>Key based subsets are <strong>incredibly fast</strong> and are particularly useful when the task involves <em>repeated subsetting</em>. But it may not be always desirable to set key and physically reorder the <em>data.table</em>. In the next <a href="datatable-secondary-indices-and-auto-indexing.html">next vignette (<code>vignette(&quot;datatable-secondary-indices-and-auto-indexing&quot;, package=&quot;data.table&quot;)</code>)</a>, we will address this using a <em>new</em> feature – <em>secondary indexes</em>.</p>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.8">
+<meta name="generator" content="litedown 0.9">
 <title>Secondary indices and auto indexing</title>
 <style type="text/css">
 body {
@@ -107,14 +107,12 @@ section.footnotes {
   body:not(.pagesjs) pre:has(.line-numbers):not(:hover) { white-space: pre; }
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.14/css/prism-xcode.min.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.35/css/prism-xcode.min.css">
 </head>
 <body>
 <div class="frontmatter">
 <div class="title"><h1>Secondary indices and auto indexing</h1></div>
-<div class="date"><h3>2026-01-24</h3></div>
+<div class="date"><h3>2026-05-04</h3></div>
 </div>
 <div class="body">
 <p>Translations of this document are available in: en | <a href="https://rdatatable.gitlab.io/data.table/articles/fr/datatable-secondary-indices-and-auto-indexing.html">fr</a></p>
@@ -201,7 +199,7 @@ head(flights)
 
 # 'index' attribute added
 names(attributes(flights))
-# [1] &quot;names&quot;             &quot;row.names&quot;         &quot;class&quot;             &quot;.internal.selfref&quot;
+# [1] &quot;row.names&quot;         &quot;class&quot;             &quot;names&quot;             &quot;.internal.selfref&quot;
 # [5] &quot;index&quot;
 </code></pre>
 <ul>
@@ -474,12 +472,12 @@ print(object.size(dt), units = &quot;Mb&quot;)
 <p>When we use <code>==</code> or <code>%in%</code> on a single column for the first time, a secondary index is created automatically, and it is used to perform the subset.</p>
 <pre><code class="language-r">## have a look at all the attribute names
 names(attributes(dt))
-# [1] &quot;names&quot;             &quot;row.names&quot;         &quot;class&quot;             &quot;.internal.selfref&quot;
+# [1] &quot;row.names&quot;         &quot;class&quot;             &quot;names&quot;             &quot;.internal.selfref&quot;
 
 ## run thefirst time
 (t1 &lt;- system.time(ans &lt;- dt[x == 989L]))
 #    user  system elapsed 
-#   0.254   0.007   0.262
+#   0.256   0.002   0.258
 head(ans)
 #        x         y
 #    &lt;int&gt;     &lt;num&gt;
@@ -492,7 +490,7 @@ head(ans)
 
 ## secondary index is created
 names(attributes(dt))
-# [1] &quot;names&quot;             &quot;row.names&quot;         &quot;class&quot;             &quot;.internal.selfref&quot;
+# [1] &quot;row.names&quot;         &quot;class&quot;             &quot;names&quot;             &quot;.internal.selfref&quot;
 # [5] &quot;index&quot;
 
 indices(dt)
@@ -502,14 +500,14 @@ indices(dt)
 <pre><code class="language-r">## successive subsets
 (t2 &lt;- system.time(dt[x == 989L]))
 #    user  system elapsed 
-#   0.010   0.002   0.011
+#   0.009   0.000   0.009
 system.time(dt[x %in% 1989:2012])
 #    user  system elapsed 
-#   0.010   0.002   0.012
+#   0.010   0.000   0.009
 </code></pre>
 <ul>
 <li>
-<p>Running the first time took 0.262 seconds where as the second time took 0.011 seconds.</p>
+<p>Running the first time took 0.258 seconds where as the second time took 0.009 seconds.</p>
 </li>
 <li>
 <p>Auto indexing can be disabled by setting the global argument <code>options(datatable.auto.index = FALSE)</code>.</p>
@@ -523,5 +521,7 @@ system.time(dt[x %in% 1989:2012])
 <p>We will discuss fast <em>subsets</em> using keys and secondary indices to <em>joins</em> in the <a href="datatable-joins.html">next vignette (<code>vignette(&quot;datatable-joins&quot;, package=&quot;data.table&quot;)</code>)</a>.</p>
 <hr />
 </div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
 </html>
