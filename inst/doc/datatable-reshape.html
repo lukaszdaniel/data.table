@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="generator" content="litedown 0.8">
+<meta name="generator" content="litedown 0.9">
 <title>Efficient reshaping using data.tables</title>
 <style type="text/css">
 body {
@@ -107,14 +107,12 @@ section.footnotes {
   body:not(.pagesjs) pre:has(.line-numbers):not(:hover) { white-space: pre; }
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.14/css/prism-xcode.min.css">
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils@1.14.35/css/prism-xcode.min.css">
 </head>
 <body>
 <div class="frontmatter">
 <div class="title"><h1>Efficient reshaping using data.tables</h1></div>
-<div class="date"><h3>2026-01-24</h3></div>
+<div class="date"><h3>2026-05-04</h3></div>
 </div>
 <div class="body">
 <p>Translations of this document are available in: en | <a href="https://rdatatable.gitlab.io/data.table/articles/fr/datatable-reshape.html">fr</a> | <a href="https://rdatatable.gitlab.io/data.table/articles/ru/datatable-reshape.html">ru</a></p>
@@ -164,7 +162,7 @@ str(DT)
 #  $ dob_child1: IDate, format: &quot;1998-11-26&quot; &quot;1996-06-22&quot; &quot;2002-07-11&quot; ...
 #  $ dob_child2: IDate, format: &quot;2000-01-29&quot; NA &quot;2004-04-05&quot; ...
 #  $ dob_child3: IDate, format: NA NA &quot;2007-09-02&quot; ...
-#  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;
+#  - attr(*, &quot;.internal.selfref&quot;)=&lt;pointer: 0x8bd017ee0&gt;
 </code></pre>
 <h4 id="sec:convert-dt-to-long-form-where-each-dob-is-a-separate-observation">- Convert <code>DT</code> to <em>long</em> form where each <code>dob</code> is a separate observation.</h4>
 <p>We could accomplish this using <code>melt()</code> by specifying <code>id.vars</code> and <code>measure.vars</code> arguments as follows:</p>
@@ -194,7 +192,7 @@ str(DT.m1)
 #  $ age_mother: int  30 27 26 32 29 30 27 26 32 29 ...
 #  $ variable  : Factor w/ 3 levels &quot;dob_child1&quot;,&quot;dob_child2&quot;,..: 1 1 1 1 1 2 2 2 2 2 ...
 #  $ value     : IDate, format: &quot;1998-11-26&quot; &quot;1996-06-22&quot; &quot;2002-07-11&quot; ...
-#  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;
+#  - attr(*, &quot;.internal.selfref&quot;)=&lt;pointer: 0x8bd017ee0&gt;
 </code></pre>
 <ul>
 <li>
@@ -344,7 +342,7 @@ str(DT.c1) ## gender column is character type now!
 #  $ child     : chr  &quot;child1&quot; &quot;child2&quot; &quot;child3&quot; &quot;child1&quot; ...
 #  $ gender    : chr  &quot;1&quot; &quot;2&quot; NA &quot;2&quot; ...
 #  $ name      : chr  &quot;Ben&quot; &quot;Anna&quot; NA &quot;Tom&quot; ...
-#  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt; 
+#  - attr(*, &quot;.internal.selfref&quot;)=&lt;pointer: 0x8bd017ee0&gt; 
 #  - attr(*, &quot;sorted&quot;)= chr [1:3] &quot;family_id&quot; &quot;age_mother&quot; &quot;child&quot;
 </code></pre>
 <h4 id="sec:issues">Issues</h4>
@@ -398,7 +396,7 @@ str(DT.m2) ## col type is preserved
 #  $ variable  : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 1 1 1 1 2 2 2 2 2 ...
 #  $ name      : chr  &quot;Ben&quot; &quot;Tom&quot; &quot;Lia&quot; &quot;Max&quot; ...
 #  $ gender    : int  1 2 2 1 2 2 NA 2 1 1 ...
-#  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;
+#  - attr(*, &quot;.internal.selfref&quot;)=&lt;pointer: 0x8bd017ee0&gt;
 </code></pre>
 <ul>
 <li>
@@ -574,5 +572,7 @@ DT.c2
 <h1></h1>
 <hr />
 </div>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 </body>
 </html>

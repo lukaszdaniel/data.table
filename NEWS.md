@@ -2,6 +2,18 @@
 
 **If you are viewing this file on CRAN, please check [latest news on GitHub](https://github.com/Rdatatable/data.table/blob/master/NEWS.md) where the formatting is also better.**
 
+## data.table [v1.18.4](https://github.com/Rdatatable/data.table/milestone/45?closed=1) 4 May 2026
+
+### BUG FIXES
+
+1. Non-equi joins combining an equality condition with two inequality conditions on the same column (e.g., `on = .(id == id, val >= lo, val <= hi)`) no longer error, [#7641](https://github.com/Rdatatable/data.table/issues/7641). The internal `chmatchdup` remapping of duplicate `rightcols` was overwriting the original column indices, causing downstream code to reference non-existent columns. Thanks @tarun-t for the report and fix, and @aitap for the diagnosis.
+
+2. By-reference sub-assignments of strings to factor columns now _actually_ match the levels in UTF-8 when required and now don't result in invalid factors being created, [#7648](https://github.com/Rdatatable/data.table/issues/7648), amending a previous incomplete fix to [#6886](https://github.com/Rdatatable/data.table/issues/6886) in v1.17.2. Thanks @BASS-JN for the report and @aitap for the fix.
+
+3. `fread()` no longer misreads dates with negative years, [#7704](https://github.com/Rdatatable/data.table/issues/7704). Thanks to @kevinushey for the report and @aitap for the fix.
+
+4. `frollapply()` no longer produces output longer than the input when the window length is also longer than the input [#7646](https://github.com/Rdatatable/data.table/issues/7646). Thanks to @hadley-johnson for reporting and @jangorecki for the fix.
+
 ## data.table [v1.18.2.1](https://github.com/Rdatatable/data.table/milestone/44?closed=1) 22 Jan 2026
 
 ### BUG FIXES

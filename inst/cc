@@ -1,2 +1,2 @@
-CC=clang
-CFLAGS=-g -O2 -Wall -pedantic
+CC=/opt/homebrew/opt/llvm/bin/clang
+CFLAGS=-falign-functions=64 -Wall -g -O2
